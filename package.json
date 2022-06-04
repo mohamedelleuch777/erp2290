@@ -1,0 +1,19 @@
+{
+  "name": "erp2290",
+  "version": "1.0.0",
+  "description": "Entreprise Resource Planning(ERP)",
+  "main": "index.js",
+  "scripts": {
+    "test": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohamedelleuch777/erp2290.git"
+  },
+  "author": "Mohamed Elleuch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mohamedelleuch777/erp2290/issues"
+  },
+  "homepage": "https://github.com/mohamedelleuch777/erp2290#readme"
+}
