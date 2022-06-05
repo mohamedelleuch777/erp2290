@@ -4,7 +4,7 @@
   "description": "Entreprise Resource Planning(ERP)",
   "main": "index.js",
   "scripts": {
-    "test": "start"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
