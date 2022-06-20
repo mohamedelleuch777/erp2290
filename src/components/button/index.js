@@ -5,6 +5,6 @@ import styles from './styles.module.css';
 export default function Button (props) {
 
     return (
-        <button>{props.label}</button>
+        <button onClick={props.onClick} className={styles.mainStyle}>{props.label}</button>
     )
 }

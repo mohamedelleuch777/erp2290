@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styles from './styles.module.css';
 
 import Checkbox from "../components/checkbox";
+import Button from "../components/button";
 
 
 export default function Login(props) {
@@ -23,10 +24,10 @@ export default function Login(props) {
                     <div>
                         <Checkbox label="Remember me"/>
                     </div>
-                    <a href="/">Forget Password</a>
+                    <a href="/forget_Password">Forget Password</a>
                 </div>
             </div>
-            <button>Login</button>
+            <Button label="Login" />
             <hr />
             <div className={styles.flexSpaceBetween}>
                 <p>
