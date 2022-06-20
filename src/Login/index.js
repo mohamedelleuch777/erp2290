@@ -3,6 +3,7 @@ import styles from './styles.module.css';
 
 import Checkbox from "../components/checkbox";
 import Button from "../components/button";
+import Loading from "../components/loading";
 
 
 export default function Login(props) {
@@ -13,6 +14,7 @@ export default function Login(props) {
 
     return (
     <div>
+        <Loading />
         <img src="/assets/img/bg.jpg" alt="background"/>
         <div className={styles.externalSection}>
             <h3 className={styles.title}>Login</h3>
@@ -27,7 +29,7 @@ export default function Login(props) {
                     <a href="/forget_Password">Forget Password</a>
                 </div>
             </div>
-            <Button label="Login" />
+            <Button label="Login" onClick={()=>alert("ahp me")}/>
             <hr />
             <div className={styles.flexSpaceBetween}>
                 <p>
