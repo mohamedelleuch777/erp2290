@@ -23,7 +23,7 @@ export default function Login(props) {
                     <div>
                         <Checkbox label="Remember me"/>
                     </div>
-                    <a href="#">Forget Password</a>
+                    <a href="/">Forget Password</a>
                 </div>
             </div>
             <button>Login</button>
@@ -33,7 +33,7 @@ export default function Login(props) {
                     Thank you and enjoy our website.<br/>
                     <strong>Your Authentication Team</strong>
                 </p>
-                <img className={styles.smallLogo} src="https://technext.github.io/guruable/assets/images/auth/Logo-small-bottom.png" />
+                <img alt="logo" className={styles.smallLogo} src="https://technext.github.io/guruable/assets/images/auth/Logo-small-bottom.png" />
             </div>
         </div>
     </div>
