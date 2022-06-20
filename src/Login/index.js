@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import styles from './styles.module.css';
 
+import Checkbox from "../components/checkbox";
+
 
 export default function Login(props) {
 
@@ -15,11 +17,11 @@ export default function Login(props) {
             <h3 className={styles.title}>Login</h3>
             <hr />
             <div className={styles.inputsContainer}>
-                <input type="email" placeholder="Enter your email here:" />
-                <input type="password"  placeholder="Enter your password here:"/>
+                <input className="form-control" type="email" placeholder="Your email:" />
+                <input className="form-control" type="password"  placeholder="Your password:"/>
                 <div className={styles.flexSpaceBetween}>
                     <div>
-                        <input type="checkbox" id="checkbox-remember" /><label fro="checkbox-remember">Remember me</label>
+                        <Checkbox label="Remember me"/>
                     </div>
                     <a href="#">Forget Password</a>
                 </div>
