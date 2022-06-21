@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 export default function Topbar (props) {
 
     const [notification] = useState(props.notification);
+    const [menuVisible, setMenuVisible] = useState(true);
 
     function openFullscreen() {
         let elem = document.getElementsByTagName('html')[0];
@@ -45,12 +46,21 @@ export default function Topbar (props) {
                     </div>
                 </div>
             </section>
+            {<FloatingMenu visibility={menuVisible} />}
         </nav>
     )
+}
 
 
 
+const FloatingMenu = (props) => {
 
-    
- 
+    return (
+        <ul className={styles.floatingExBox}>
+            <li className={styles.floatingBoxItem}><i class="fa fa-cog" aria-hidden="true"></i>Settings</li>
+            <li className={styles.floatingBoxItem}><i class="fa fa-user-md" aria-hidden="true"></i>Profile</li>
+            <li className={styles.floatingBoxItem}><i class="fa fa-envelope-o" aria-hidden="true"></i>Messages</li>
+            <li className={styles.floatingBoxItem}><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
+        </ul>
+    )
 }

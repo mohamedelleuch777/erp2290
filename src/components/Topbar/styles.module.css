@@ -81,8 +81,32 @@
     transform: translate(10px, -8px);
 }
 
-
-
 .profileDiv i {
     font-size: 25px;
+}
+
+.floatingExBox {
+    position: absolute;
+    width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 0 7px -3px;
+    top: 83px;
+    right: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.floatingBoxItem {
+    font-size: 14px;
+    text-align: center;
+    padding: 10px 15px;
+}
+
+.floatingBoxItem i {
+    margin: 0 20px 0 0px;
+}
+
+.floatingBoxItem:hover {
+    background-color: #f1f1f1;
 }
