@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from './styles.module.css';
 
 
 export default function Topbar (props) {
+
+    const [notification] = useState(props.notification);
+
+    function openFullscreen() {
+        let elem = document.getElementsByTagName('html')[0];
+          if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+          } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+          } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+          }
+    }
+
+    const processFullscreen = () => {
+        if(document.fullscreen) {
+            document.exitFullscreen();
+        } else {
+            openFullscreen();
+        }
+    }
 
     return (
         <nav className={styles.navBar} >
@@ -12,9 +33,10 @@ export default function Topbar (props) {
             </section>
             <section className={styles.whiteSection}>
                 <div className={styles.leftItem}>
-                    <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                    <i onClick={processFullscreen} class="fa fa-arrows-alt" aria-hidden="true"></i>
                 </div>
                 <div className={styles.rightItem}>
+                    {notification && <span className={styles.redDot} />}
                     <i className="fa fa-bell-o" aria-hidden="true"></i>
                     <div className={styles.profileDiv}>
                         <img className={styles.profilePicture} alt="profile-avatar" src="/assets/img/avatar.jpg" />
