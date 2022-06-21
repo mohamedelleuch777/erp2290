@@ -8,7 +8,13 @@
 }
 
 .blackSection {
-    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #303549;
+    width: 250px;
+    padding: 10px;
 }
 
 .whiteSection {
@@ -33,7 +39,9 @@
 }
 
 .whiteSection .leftItem {
-    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .whiteSection .rightItem .profilePicture {
@@ -45,4 +53,18 @@
 
 .whiteSection .rightItem h3 {
     margin-right: 20px;
+}
+
+.round {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: #fff solid 1px;
+    color: #fff;
+    background-color: #303548;
+    margin-right: 10px;
+    cursor: pointer;
 }
