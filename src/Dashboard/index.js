@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Loading from "../components/loading";
+import Topbar from "../components/topbar";
+
 
 
 export default function Dashboard(props) {
@@ -15,8 +17,9 @@ export default function Dashboard(props) {
         {isLoading && <Loading />}
         {isLoading ||
             <div>
-                fewfwe
+                <Topbar />
                 <button>click me</button>
+                <i className="fa fa-id-card" aria-hidden="true"></i>
             </div>
         }
     </div>

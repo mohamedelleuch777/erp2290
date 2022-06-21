@@ -4,6 +4,8 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {Routes,Route} from 'react-router'
 import {BrowserRouter} from 'react-router-dom'
+// font awsome:
+import 'font-awesome/css/font-awesome.min.css';
 
 import Dashboard from './Dashboard'
 import Login from './Login/index'
