@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Loading from "../components/loading";
+import Sidebar from "../components/sidebar";
 import Topbar from "../components/topbar";
 import useFullscreen from "../Hooks/fullscreen";
 
@@ -20,6 +21,7 @@ export default function Dashboard(props) {
         {isLoading ||
             <div>
                 <Topbar />
+                <Sidebar />
                 <main>
                     <button>click me</button>
                     <i className="fa fa-id-card" aria-hidden="true"></i>
