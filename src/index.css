@@ -44,3 +44,12 @@ body.no-extra {
   box-shadow: 0 0 10px -4px;
 
 }
+
+main {
+  position: absolute;
+  width: calc(100vw - 270px);
+  height: calc(100vh - 83px);
+  top: 83px;
+  left: 270px;
+  overflow: auto;
+}

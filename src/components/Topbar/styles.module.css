@@ -1,6 +1,7 @@
 
 .navBar {
     width: 100%;
+    position: fixed;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -77,4 +78,10 @@
     border: none;
     background-color: #ff6565;
     transform: translate(10px, -8px);
+}
+
+
+
+.profileDiv i {
+    font-size: 25px;
 }

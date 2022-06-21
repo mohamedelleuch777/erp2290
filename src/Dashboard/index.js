@@ -20,8 +20,10 @@ export default function Dashboard(props) {
         {isLoading ||
             <div>
                 <Topbar />
-                <button>click me</button>
-                <i className="fa fa-id-card" aria-hidden="true"></i>
+                <main>
+                    <button>click me</button>
+                    <i className="fa fa-id-card" aria-hidden="true"></i>
+                </main>
             </div>
         }
     </div>
