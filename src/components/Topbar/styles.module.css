@@ -114,3 +114,7 @@
 .floatingBoxItem:active {
     background-color: #c9c9c9;
 }
+
+.profileDiv i {
+    cursor: pointer;
+}
