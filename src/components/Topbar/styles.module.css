@@ -110,3 +110,7 @@
 .floatingBoxItem:hover {
     background-color: #f1f1f1;
 }
+
+.floatingBoxItem:active {
+    background-color: #c9c9c9;
+}

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './styles.module.css';
 
 
 export default function Topbar (props) {
 
     const [notification] = useState(props.notification);
-    const [menuVisible, setMenuVisible] = useState(true);
+    const [menuVisible, setMenuVisible] = useState(false);
 
     function openFullscreen() {
         let elem = document.getElementsByTagName('html')[0];
@@ -26,6 +26,18 @@ export default function Topbar (props) {
         }
     }
 
+    const toggleMenu = () => {
+        setTimeout(()=>{
+            setMenuVisible(true);
+        },150);
+    }
+
+    useEffect(()=>{
+        document.addEventListener("click", ()=>{
+            setMenuVisible(false);
+        })
+    },[]);
+
     return (
         <nav className={styles.navBar} >
             <section className={styles.blackSection}>
@@ -42,7 +54,7 @@ export default function Topbar (props) {
                     <div className={styles.profileDiv}>
                         <img className={styles.profilePicture} alt="profile-avatar" src="/assets/img/avatar.jpg" />
                         <h3 className={styles.profileName}>Mohamed Elleuch</h3>
-                        <i className="fa fa-angle-down" aria-hidden="true"></i>
+                        <i onClick={toggleMenu} className="fa fa-angle-down" aria-hidden="true"></i>
                     </div>
                 </div>
             </section>
@@ -55,12 +67,22 @@ export default function Topbar (props) {
 
 const FloatingMenu = (props) => {
 
-    return (
-        <ul className={styles.floatingExBox}>
-            <li className={styles.floatingBoxItem}><i class="fa fa-cog" aria-hidden="true"></i>Settings</li>
-            <li className={styles.floatingBoxItem}><i class="fa fa-user-md" aria-hidden="true"></i>Profile</li>
-            <li className={styles.floatingBoxItem}><i class="fa fa-envelope-o" aria-hidden="true"></i>Messages</li>
-            <li className={styles.floatingBoxItem}><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
-        </ul>
-    )
+    if(props.visibility) {
+
+        const handleMenu = (id) => {
+            console.error(id)
+        }
+
+
+        return (
+            <ul className={styles.floatingExBox}>
+                <li onClick={()=>handleMenu(1)} className={styles.floatingBoxItem}><i class="fa fa-cog" aria-hidden="true"></i>Settings</li>
+                <li onClick={()=>handleMenu(2)} className={styles.floatingBoxItem}><i class="fa fa-user-md" aria-hidden="true"></i>Profile</li>
+                <li onClick={()=>handleMenu(3)} className={styles.floatingBoxItem}><i class="fa fa-envelope-o" aria-hidden="true"></i>Messages</li>
+                <li onClick={()=>handleMenu(4)} className={styles.floatingBoxItem}><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
+            </ul>
+        )
+    } else {
+        return <></>
+    }
 }
