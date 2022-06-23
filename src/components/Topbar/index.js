@@ -42,11 +42,11 @@ export default function Topbar (props) {
         <nav className={styles.navBar} >
             <section className={styles.blackSection}>
                 <img alt="logo" className={styles.smallLogo} src="/assets/img/logo.png" />
-                <span className={styles.round}><i class="fa fa-bars" aria-hidden="true"></i></span>
+                <span className={styles.round}><i className="fa fa-bars" aria-hidden="true"></i></span>
             </section>
             <section className={styles.whiteSection}>
                 <div className={styles.leftItem}>
-                    <i onClick={processFullscreen} class="fa fa-arrows-alt" aria-hidden="true"></i>
+                    <i onClick={processFullscreen} className="fa fa-arrows-alt" aria-hidden="true"></i>
                 </div>
                 <div className={styles.rightItem}>
                     {notification && <span className={styles.redDot} />}
@@ -76,10 +76,10 @@ const FloatingMenu = (props) => {
 
         return (
             <ul className={styles.floatingExBox}>
-                <li onClick={()=>handleMenu(1)} className={styles.floatingBoxItem}><i class="fa fa-cog" aria-hidden="true"></i>Settings</li>
-                <li onClick={()=>handleMenu(2)} className={styles.floatingBoxItem}><i class="fa fa-user-md" aria-hidden="true"></i>Profile</li>
-                <li onClick={()=>handleMenu(3)} className={styles.floatingBoxItem}><i class="fa fa-envelope-o" aria-hidden="true"></i>Messages</li>
-                <li onClick={()=>handleMenu(4)} className={styles.floatingBoxItem}><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
+                <li onClick={()=>handleMenu(1)} className={styles.floatingBoxItem}><i className="fa fa-cog" aria-hidden="true"></i>Settings</li>
+                <li onClick={()=>handleMenu(2)} className={styles.floatingBoxItem}><i className="fa fa-user-md" aria-hidden="true"></i>Profile</li>
+                <li onClick={()=>handleMenu(3)} className={styles.floatingBoxItem}><i className="fa fa-envelope-o" aria-hidden="true"></i>Messages</li>
+                <li onClick={()=>handleMenu(4)} className={styles.floatingBoxItem}><i className="fa fa-sign-out" aria-hidden="true"></i>Logout</li>
             </ul>
         )
     } else {

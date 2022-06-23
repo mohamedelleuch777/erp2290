@@ -1,0 +1,13 @@
+.mainStyle {
+    width: 100%;
+    font-size: 18px;
+    padding: 10px;
+    font-weight: 400;
+    color: #fff;
+    background-color: #4680ff;
+    border: none;
+    border-radius: 2px;
+    margin: 20px 0;
+    cursor: pointer;
+    outline: none;
+}

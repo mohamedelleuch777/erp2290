@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import styles from './styles.module.css';
 
 export default function Sidebar(props) {
@@ -24,7 +24,11 @@ export default function Sidebar(props) {
         <section className={styles.pages}>
             <h4>Pages:</h4>
             <ul className={styles.listUL}>
-                <Item label="Dashboard" onClick={handleItemSelection} />
+                <Item label="Dashboard" icon="home" color="#4680ff" path="/" />
+                <Item label="Clients" icon="users" color="#FC6180" path="/login" />
+                <Item label="Stock" icon="bar-chart" color="#93BE52" path="/" />
+                <Item label="Users" icon="user" color="#FFB64D" path="/" />
+                <Item label="Help" icon="question" color="#ff4646" path="/" />
             </ul>
         </section>
     </div>
@@ -33,10 +37,16 @@ export default function Sidebar(props) {
 
 const Item = (props) => {
 
+    const [path,] = useState(props.path)
+
+    const redirect = () => {
+        window.location.href = path;
+    }
+
     return (
-        <li className={styles.item} onClick={props.onClick}>
-            <div className={styles.iconContainer}>
-                <i className="fa fa-home" aria-hidden="true"></i>
+        <li className={styles.item} onClick={redirect}>
+            <div className={styles.iconContainer} style={{backgroundColor:props.color}}>
+                <i className={"fa fa-"+props.icon} aria-hidden="true"></i>
             </div>
             <h3>{props.label}</h3>
         </li>
