@@ -3,18 +3,6 @@ import React from "react";
 import Table_ from 'react-bootstrap/Table'
 
 
-const data = {
-    header: [
-        "First Name:",
-        "Last Name:",
-        "User Name:"
-    ],
-    body: [
-        ["Mark", "Otto", "@mdo"],
-        ["Jacob", "Thornton", "@fat"],
-        ["Larry", "the Bird", "@twitter"],
-    ]
-};
 
 export default function Table (props) {
 
@@ -23,7 +11,7 @@ export default function Table (props) {
             <thead>
                 <tr>
                     <th>#</th>
-                    {data.header.map((e,i)=>{
+                    {props.data.header.map((e,i)=>{
                         return(
                             <th key={i}>{e}</th>
                         )
@@ -31,7 +19,7 @@ export default function Table (props) {
                 </tr>
             </thead>
             <tbody>
-                {data.body.map((e,i)=>{
+                {props.data.body.map((e,i)=>{
                     return(
                         <tr>
                             <th scope="row">{i}</th>
