@@ -11,7 +11,7 @@ export default function Table (props) {
             <thead>
                 <tr>
                     <th>#</th>
-                    {props.data.header.map((e,i)=>{
+                    {props.data && props.data.header.map((e,i)=>{
                         return(
                             <th key={i}>{e}</th>
                         )
@@ -19,7 +19,7 @@ export default function Table (props) {
                 </tr>
             </thead>
             <tbody>
-                {props.data.body.map((e,i)=>{
+                {props.data && props.data.body.map((e,i)=>{
                     return(
                         <tr>
                             <th scope="row">{i}</th>

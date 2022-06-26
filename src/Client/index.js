@@ -5,29 +5,38 @@ import Sidebar from "../components/sidebar";
 import Table from "../components/table";
 import Topbar from "../components/topbar";
 import useFullscreen from "../Hooks/fullscreen";
-
-
-const data = {
-    header: [
-        "First Name:",
-        "Last Name:",
-        "User Name:"
-    ],
-    body: [
-        ["Mark", "Otto", "@mdo"],
-        ["Jacob", "Thornton", "@fat"],
-        ["Larry", "the Bird", "@twitter"],
-    ]
-};
+;
 
 
 export default function Client(props) {
     const [isLoading, setisLoading] = useState(true);
+    const [data, setdata] = useState({
+        header: [
+            "First Name:",
+            "Last Name:",
+            "User Name:"
+        ],
+        body: [
+            ["Mark", "Otto", "@mdo"],
+            ["Jacob", "Thornton", "@fat"],
+            ["Larry", "the Bird", "@twitter"],
+        ]
+    });
     //const {fscreen, setFScreen} = useFullscreen(false)
+
+    const getData = async () => {
+        let response = await fetch("http://erp2290.xilyor.com//API/clients_mgr.php", {
+            method: "GET",
+        });
+        let res = await response.json();
+        console.log(res);
+        setdata(res);
+    }
 
     useEffect(()=>{
         setTimeout(() => {
             setisLoading(false);
+            getData();
         }, 2500);
     },[]);
 

@@ -34,12 +34,7 @@ $myJsonHeader = '[';
 for($i=0; $i<sizeof($header); $i++) {
     //var_dump($header[$i]);
     $myJsonHeader .=
-    '
-    {
-        "name": "' . $header[$i] . '",
-        "selector": "row => row.' . $header[$i] . '",
-        "sortable": ' . "true" . '
-    },';
+    '"'.$header[$i].'",';
 }
 $myJsonHeader = substr($myJsonHeader, 0, -1);
 $myJsonHeader .= ']';
@@ -51,14 +46,24 @@ $header = $myJsonHeader;
 
 
 
-$body = [];
-
+$body = "[";
 while($res && $query->AvailableResult()) {
     $row = $query->GetObject();
-    array_push($body, $row);
+    $arr = json_decode(json_encode($row), true);
+    $keys = array_keys($arr);
+    $val = '[';
+    for($i=0; $i<sizeof($keys); $i++) {
+        $val .= '"' . $arr[$keys[$i]] . '",';
+    }
+    $val = substr($val, 0, -1);
+    $body .=  $val . '],';
 }
 
-$body = json_encode($body);
+
+$body = substr($body, 0, -1);
+$body .= ']';
+
+//$body = json_encode($body);
 
 // $data = array(
 //     "header" => $header,

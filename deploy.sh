@@ -32,9 +32,9 @@ do
 key="$1"
 
 # Example command:
-# ./deploy_sftp.sh -s php
-# ./deploy_sftp.sh -s all -b
-# ./deploy_sftp.sh -s all -bt
+# ./deploy.sh -s php
+# ./deploy.sh -s all -b
+# ./deploy.sh -s all -bt
 
 case $key in
     -s|--sources)
