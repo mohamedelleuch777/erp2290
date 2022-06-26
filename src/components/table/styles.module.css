@@ -1,13 +1,282 @@
-.mainStyle {
-    width: 100%;
-    font-size: 18px;
-    padding: 10px;
-    font-weight: 400;
-    color: #fff;
-    background-color: #4680ff;
+.tablePrimary,
+.tablePrimary > td,
+.tablePrimary > th {
+  background-color: #4680FE; }
+
+.tableResponsive {
+  display: inline-block;
+  width: 100%;
+  overflow-x: auto; }
+
+.table.tableXl td,
+.table.tableXl th {
+  padding: 1.25rem 2rem; }
+
+.table.tableLg td,
+.table.tableLg th {
+  padding: 0.9rem 2rem; }
+
+.table.tableDe td,
+.table.tableDe th {
+  padding: 0.75rem 2rem; }
+
+.table.tableSm td,
+.table.tableSm th {
+  padding: 0.6rem 2rem; }
+
+.table.tableXs td,
+.table.tableXs th {
+  padding: 0.4rem 2rem; }
+
+.tableColumned > tbody > tr > th:first-child,
+.tableColumned > tbody > tr > td:first-child {
+  border-left: 0; }
+.tableColumned > tfoot > tr > th:first-child,
+.tableColumned > tfoot > tr > td:first-child {
+  border-left: 0; }
+.tableColumned > tbody > tr > th,
+.tableColumned > tbody > tr > td {
+  border: 0;
+  border-left: 1px solid #ddd; }
+.tableColumned > tfoot > tr > th,
+.tableColumned > tfoot > tr > td {
+  border: 0;
+  border-left: 1px solid #ddd; }
+
+.tableBorderStyle {
+  padding: 0; }
+  .tableBorderStyle .table {
+    margin-bottom: 0; }
+
+.table > thead > tr > th {
+  border-bottom-color: #ccc; }
+
+.tableBorderless tbody tr td,
+.tableBorderless tbody tr th {
+  border: 0; }
+
+.tableBordered > thead > tr.borderSolid > th,
+.tableBordered > thead > tr.borderSolid > td {
+  border-bottom-width: 2px; }
+.tableBordered > thead > tr.borderSolid:first-child > td,
+.tableBordered > thead > tr.borderSolid:first-child th {
+  border-bottom-width: 2px; }
+
+.tableBordered > thead > tr.borderDouble > th,
+.tableBordered > thead > tr.borderDouble > td {
+  border-bottom-width: 3px;
+  border-bottom-style: double; }
+.tableBordered > thead > tr.borderDouble:first-child > td,
+.tableBordered > thead > tr.borderDouble:first-child th {
+  border-bottom-width: 3px;
+  border-bottom-style: double; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .cardBlock {
+    padding: 1.25rem; }
+  
+  .card {
+    border-radius: 5px;
+    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
     border: none;
-    border-radius: 2px;
-    margin: 20px 0;
-    cursor: pointer;
-    outline: none;
-}
+    margin-bottom: 30px; }
+    .card .cardFooter {
+      background-color: #fff;
+      border-top: none; }
+    .card .cardHeader {
+      background-color: transparent;
+      border-bottom: none;
+      padding: 25px 20px; }
+      .card .cardHeader .cardHeader-left {
+        display: inline-block; }
+      .card .cardHeader .cardHeaderRight {
+        border-radius: 0 0 0 7px;
+        right: 10px;
+        top: 18px;
+        display: inline-block;
+        float: right;
+        padding: 7px 0;
+        position: absolute; }
+        .card .cardHeader .cardHeaderRight i {
+          margin: 0 8px;
+          cursor: pointer;
+          font-size: 14px;
+          color: #505458;
+          line-height: 20px; }
+          .card .cardHeader .cardHeaderRight i.icofont.icofontSpinnerAlt5 {
+            display: none; }
+        .card .cardHeader .cardHeaderRight .cardOption {
+          width: 35px;
+          height: 20px;
+          overflow: hidden;
+          transition: 0.3s ease-in-out; }
+          .card .cardHeader .cardHeaderRight .cardOption li {
+            display: inline-block; }
+      .card .cardHeader span {
+        color: #919aa3;
+        display: block;
+        font-size: 13px;
+        margin-top: 5px; }
+      .card .cardHeader + .cardBlock,
+      .card .cardHeader + .cardBlockBig {
+        padding-top: 0; }
+      .card .cardHeader h5 {
+        margin-bottom: 0;
+        color: #505458;
+        font-size: 14px;
+        font-weight: 600;
+        display: inline-block;
+        margin-right: 10px;
+        line-height: 1.4; }
+    .card .cardBlock table tr {
+      padding-bottom: 20px; }
+    .card .cardBlock .subTitle {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px; }
+    .card .cardBlock code {
+      background-color: #eee;
+      margin: 5px;
+      display: inline-block; }
+    .card .cardBlock .dropdownMenu {
+      top: 38px; }
+    .card .cardBlock p {
+      line-height: 25px; }
+    .card .cardBlock a.dropdownItem {
+      margin-bottom: 0;
+      font-size: 14px;
+      transition: 0.25s; }
+      .card .cardBlock a.dropdownItem:active,
+      .card .cardBlock a.dropdownItem .active {
+        background-color: #4680ff; }
+    .card .cardBlock.removeLabel i {
+      margin: 0;
+      padding: 0; }
+    .card .cardBlock.buttonList span.badge {
+      margin-left: 5px; }
+    .card .cardBlock .dropdownMenu {
+      background-color: #fff;
+      padding: 0; }
+      .card .cardBlock .dropdownMenu .dropdownDivider {
+        background-color: #ddd;
+        margin: 3px 0; }
+    .card .cardBlock .dropdownMenu > a {
+      padding: 10px 16px;
+      line-height: 1.429; }
+    .card .cardBlock .dropdownMenu > li > a:focus,
+    .card .cardBlock .dropdownMenu > li > a:hover {
+      background-color: rgba(202, 206, 209, 0.5); }
+    .card .cardBlock .dropdownMenu > li:firstChild > a:firstChild {
+      border-top-right-radius: 4px;
+      border-top-left-radius: 4px; }
+    .card .cardBlock .badgeBox {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 12px 0; }
+    .card .cardBlockBig {
+      padding: 30px 35px; }
+    .card .cardblockSmall {
+      padding: 15px 20px; }
+    .card .innerCardBlock {
+      border: 1px solid #ddd; }
+  
+  .pcoded .card.fullCard {
+    position: fixed;
+    top: 80px;
+    z-index: 99999;
+    box-shadow: none;
+    right: 0;
+    border-radius: 0;
+    border: 1px solid #ddd;
+    width: calc(100vw - 287px);
+    height: calc(100vh - 80px); }
+    .pcoded .card.fullCard.cardLoad {
+      position: fixed; }
+  .pcoded .card.cardLoad {
+    position: relative;
+    overflow: hidden; }
+    .pcoded .card.cardLoad .cardLoader {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.7);
+      z-index: 999; }
+      .pcoded .card.cardLoad .cardLoader i {
+        margin: 0 auto;
+        color: #ab7967;
+        font-size: 20px; }
+  .pcoded[vertical-nav-type="expanded"] .card.fullCard {
+    width: calc(100vw - 287px); }
+  .pcoded[vertical-nav-type="collapsed"] .card.fullCard {
+    width: calc(100vw - 97px); }
+  .pcoded[vertical-nav-type="offcanvas"] .card.fullCard {
+    width: 100vw; }
+  
+  .cardHeaderText {
+    margin-bottom: 0;
+    font-size: 1rem;
+    color: rgba(51, 51, 51, 0.85);
+    font-weight: 600;
+    display: inline-block;
+    vertical-align: middle; }
+  
+  .icofontRoundedDown {
+    -webkit-transition: all ease-in 0.3s;
+    display: inline-block;
+    transition: all ease-in 0.3s; }
+  
+  .iconUp {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg); }
+  
+  .rotateRefresh {
+    -webkit-animation: mymove 0.8s infinite linear;
+    animation: mymove 0.8s infinite linear;
+    display: inline-block; }
+  
+  @-webkit-keyframes mymove {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg); }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg); } }
+  @keyframes mymove {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg); }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg); } }
+  .breadcrumbTitle a {
+    font-size: 14px;
+    color: #4a6076; }
+  .breadcrumbTitle li:last-child a {
+    color: #7e7e7e; }
+  
+  .subTitle {
+    border-bottom: 1px solid rgba(204, 204, 204, 0.35);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    color: #2c3e50; }

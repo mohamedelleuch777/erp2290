@@ -47,9 +47,10 @@ body.no-extra {
 
 main {
   position: absolute;
-  width: calc(100vw - 270px);
-  height: calc(100vh - 83px);
+  width: calc(100vw - 330px);
+  height: calc(100vh - 143px);
   top: 83px;
   left: 270px;
   overflow: auto;
+  padding: 30px;
 }

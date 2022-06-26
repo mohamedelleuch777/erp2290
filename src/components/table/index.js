@@ -1,39 +1,49 @@
 import React from "react";
-import styles from './styles.module.css';
+//import styles from './styles.module.css';
+import Table_ from 'react-bootstrap/Table'
 
+
+const data = {
+    header: [
+        "First Name:",
+        "Last Name:",
+        "User Name:"
+    ],
+    body: [
+        ["Mark", "Otto", "@mdo"],
+        ["Jacob", "Thornton", "@fat"],
+        ["Larry", "the Bird", "@twitter"],
+    ]
+};
 
 export default function Table (props) {
 
     return (
-        <table class="table table-inverse">
+        <Table_ striped bordered hover size="sm">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
+                    {data.header.map((e,i)=>{
+                        return(
+                            <th key={i}>{e}</th>
+                        )
+                    })}
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                {data.body.map((e,i)=>{
+                    return(
+                        <tr>
+                            <th scope="row">{i}</th>
+                            {e.map((e,i)=>{
+                                return(
+                                    <td key={i}>{e}</td>
+                                )
+                            })}
+                        </tr>
+                    )
+                })}
             </tbody>
-        </table>
+        </Table_>
     )
 }
