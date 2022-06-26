@@ -48,7 +48,7 @@ const Item = (props) => {
             <div className={styles.iconContainer} style={{backgroundColor:props.color}}>
                 <i className={"fa fa-"+props.icon} aria-hidden="true"></i>
             </div>
-            <h3>{props.label}</h3>
+            <h3 className={styles.itemText}>{props.label}</h3>
         </li>
     )
 }
