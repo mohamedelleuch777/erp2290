@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from './styles.module.css';
 import TableBootstrap from 'react-bootstrap/Table'
 import Loading from "../loading";
@@ -7,11 +7,16 @@ import Button from "../button";
 
 
 
-const options = [10,20,50,100,250,500]
+const options = [5,10,20,50,100,250,500]
 
 export default function Table (props) {
-
+    
     const [isLoading, setisLoading] = useState(props.loading);
+    const [refCombo, setrefCombo] = useState(null);
+
+    const changeLimit = () => {
+        localStorage.setItem("limit", refCombo.current.value);
+    }
 
     useEffect(() => {
         setisLoading(props.loading);
@@ -48,7 +53,7 @@ export default function Table (props) {
             </TableBootstrap>
             <div  className={styles.buttonsContainer}>
                 <div>
-                    <Combobox options={options} icon="file-text-o" />
+                    <Combobox setRef={setrefCombo} options={options} icon="file-text-o" onChange={changeLimit} />
                 </div>
                 <div>
                     <Button icon="backward" style={btnStyle} />
