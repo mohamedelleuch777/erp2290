@@ -10,6 +10,7 @@ import useFullscreen from "../Hooks/fullscreen";
 
 export default function Client(props) {
     const [isLoading, setisLoading] = useState(true);
+    const [tableLoading, settableLoading] = useState(true);
     const [data, setdata] = useState({
         header: [
             "First Name:",
@@ -31,6 +32,7 @@ export default function Client(props) {
         let res = await response.json();
         console.log(res);
         setdata(res);
+        settableLoading(false);
     }
 
     useEffect(()=>{
@@ -48,7 +50,7 @@ export default function Client(props) {
                 <Sidebar />
                 <main>
                     <Card title="Client Management" text="lorem spam a introduire la lubrification de la société" />
-                    <Table data={data} />
+                    <Table data={data} loading={tableLoading} />
                 </main>
             </div>
         }

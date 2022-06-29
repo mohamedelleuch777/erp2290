@@ -8,11 +8,13 @@ import useFullscreen from "../Hooks/fullscreen";
 
 export default function Dashboard(props) {
     const [isLoading, setisLoading] = useState(true);
+    const [tableLoading, settableLoading] = useState(true);
     //const {fscreen, setFScreen} = useFullscreen(false)
 
     useEffect(()=>{
         setTimeout(() => {
             setisLoading(false);
+            
         }, 2500);
     },[]);
 
@@ -23,7 +25,7 @@ export default function Dashboard(props) {
                 <Topbar />
                 <Sidebar />
                 <main>
-                    <Table />
+                    <Table Loading={tableLoading} />
                 </main>
             </div>
         }
