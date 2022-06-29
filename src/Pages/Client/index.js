@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import Card from "../components/card";
-import Loading from "../components/loading";
-import Sidebar from "../components/sidebar";
-import Table from "../components/table";
-import Topbar from "../components/topbar";
-import useFullscreen from "../Hooks/fullscreen";
+import Card from "../../components/card";
+import Loading from "../../components/loading";
+import Sidebar from "../../components/sidebar";
+import Table from "../../components/table";
+import Topbar from "../../components/topbar";
+import useFullscreen from "../../Hooks/fullscreen";
 ;
 
 

@@ -7,9 +7,9 @@ import {BrowserRouter} from 'react-router-dom'
 // font awsome:
 import 'font-awesome/css/font-awesome.min.css';
 
-import Dashboard from './Dashboard'
-import Login from './Login/index'
-import Client from './Client';
+import Dashboard from './Pages/Dashboard'
+import Login from './Pages/Login'
+import Client from './Pages/Client';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

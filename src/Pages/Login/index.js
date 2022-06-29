@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import styles from './styles.module.css';
 
-import Checkbox from "../components/checkbox";
-import Button from "../components/button";
-import Loading from "../components/loading";
+import Checkbox from '../../components/checkbox'
+import Button from "../../components/button";
+import Loading from "../../components/loading";
 
 
 export default function Login(props) {
