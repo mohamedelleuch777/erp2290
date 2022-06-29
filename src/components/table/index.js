@@ -4,6 +4,8 @@ import TableBootstrap from 'react-bootstrap/Table'
 import Loading from "../loading";
 import Combobox from "../combobox";
 import Button from "../button";
+import useForceUpdate from "../../Hooks/forceUpdate";
+
 
 
 
@@ -11,58 +13,65 @@ const options = [5,10,20,50,100,250,500]
 
 export default function Table (props) {
     
+    const forceUpdate = useForceUpdate();
     const [isLoading, setisLoading] = useState(props.loading);
     const [refCombo, setrefCombo] = useState(null);
 
     const changeLimit = () => {
         localStorage.setItem("limit", refCombo.current.value);
+        window.dispatchEvent( new Event('storage') )
+        props.getData && props.getData();
     }
 
     useEffect(() => {
         setisLoading(props.loading);
+        forceUpdate();
     },[props.loading]);
 
     return (
         <>
             {isLoading && <Loading />}
-            {isLoading || <><TableBootstrap striped bordered hover size="sm">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        {props.data && props.data.header.map((e,i)=>{
-                            return(
-                                <th key={i}>{e}</th>
-                            )
-                        })}
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.data && props.data.body.map((e,i)=>{
-                        return(
+            {isLoading || 
+                <>
+                    <TableBootstrap striped bordered hover size="sm">
+                        <thead>
                             <tr>
-                                <th scope="row">{i}</th>
-                                {e.map((e,i)=>{
+                                <th>#</th>
+                                {props.data && props.data.header.map((e,i)=>{
                                     return(
-                                        <td key={i}>{e}</td>
+                                        <th key={i}>{e}</th>
                                     )
                                 })}
                             </tr>
-                        )
-                    })}
-                </tbody>
-            </TableBootstrap>
-            <div  className={styles.buttonsContainer}>
-                <div>
-                    <Combobox setRef={setrefCombo} options={options} icon="file-text-o" onChange={changeLimit} />
-                </div>
-                <div>
-                    <Button icon="backward" style={btnStyle} />
-                    <Button icon="caret-left" style={btnStyle} />
-                    <Button icon="caret-right" style={btnStyle} />
-                    <Button icon="forward" style={btnStyle} />
-                </div>
-            </div>
-            </>}
+                        </thead>
+                        <tbody>
+                            {props.data && props.data.body.map((e,i)=>{
+                                return(
+                                    <tr>
+                                        <th scope="row">{i}</th>
+                                        {e.map((e,i)=>{
+                                            return(
+                                                <td key={i}>{e}</td>
+                                            )
+                                        })}
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </TableBootstrap>
+                    <div  className={styles.buttonsContainer}>
+                        <div>
+                            <Combobox setRef={setrefCombo} options={options} icon="file-text-o" onChange={changeLimit} />
+                        </div>
+                        <div>
+                            <Button icon="backward" style={btnStyle} />
+                            <Button icon="caret-left" style={btnStyle} />
+                            <Button icon="caret-right" style={btnStyle} />
+                            <Button icon="forward" style={btnStyle} />
+                        </div>
+                    </div>
+                </>
+            }
         </>
     )
 }
