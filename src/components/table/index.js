@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-//import styles from './styles.module.css';
+import styles from './styles.module.css';
 import TableBootstrap from 'react-bootstrap/Table'
 import Loading from "../loading";
+import Combobox from "../combobox";
+import Button from "../button";
 
 
 
+const options = [10,20,50,100,250,500]
 
 export default function Table (props) {
 
@@ -17,7 +20,7 @@ export default function Table (props) {
     return (
         <>
             {isLoading && <Loading />}
-            {isLoading || <TableBootstrap striped bordered hover size="sm">
+            {isLoading || <><TableBootstrap striped bordered hover size="sm">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -42,7 +45,28 @@ export default function Table (props) {
                         )
                     })}
                 </tbody>
-            </TableBootstrap>}
+            </TableBootstrap>
+            <div  className={styles.buttonsContainer}>
+                <div>
+                    <Combobox options={options} icon="file-text-o" />
+                </div>
+                <div>
+                    <Button icon="backward" style={btnStyle} />
+                    <Button icon="caret-left" style={btnStyle} />
+                    <Button icon="caret-right" style={btnStyle} />
+                    <Button icon="forward" style={btnStyle} />
+                </div>
+            </div>
+            </>}
         </>
     )
+}
+
+const btnStyle = {
+    margin: 0,
+    height: 40,
+    width: 40,
+    backgroundColor: "#fff",
+    border: "none",
+    color: "#999"
 }

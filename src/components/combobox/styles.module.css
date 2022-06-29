@@ -1,0 +1,10 @@
+.mainStyle {
+    width: 100px;
+    height: 40px;
+    padding-left: 30px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    transition: all 250ms ease;
+    transition-property: box-shadow, border-color;
+    outline: none;
+}

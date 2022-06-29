@@ -280,3 +280,10 @@
     font-size: 14px;
     font-weight: 400;
     color: #2c3e50; }
+
+
+  .buttonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
