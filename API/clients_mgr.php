@@ -44,8 +44,6 @@ $header = $myJsonHeader;
 
 
 
-
-
 $body = "[";
 while($res && $query->AvailableResult()) {
     $row = $query->GetObject();
@@ -63,16 +61,23 @@ while($res && $query->AvailableResult()) {
 $body = substr($body, 0, -1);
 $body .= ']';
 
-//$body = json_encode($body);
 
-// $data = array(
-//     "header" => $header,
-//     "body" => $body
 
-// );
+$totalCount = 0;
+$sql = "SELECT COUNT(`Ref`) as totalCount FROM ".$dbName.".".$tableName.$condition." LIMIT ".$limit." OFFSET ".$offset;
+$query = new MySQL_Query($servername, $username, $password, $dbName);
+$res = $query->ExecSql($sql);
 
-// echo json_encode($data);
+if($res && $query->AvailableResult()) {
+    $row = $query->GetObject();
+    $totalCount = $row->totalCount;
+}
+
+
+
+
 echo '{
     "header": ' . $header . ',
-    "body": ' . $body . '
+    "body": ' . $body . ',
+    "totalCount": ' . $totalCount . '
 }';
