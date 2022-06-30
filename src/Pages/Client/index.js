@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import styles from './styles.module.css';
 import Card from "../../components/card";
 import Loading from "../../components/loading";
 import Sidebar from "../../components/sidebar";
@@ -7,6 +8,7 @@ import Topbar from "../../components/topbar";
 import useForceUpdate from "../../Hooks/forceUpdate";
 
 import Swal from 'sweetalert2'
+import { Form } from "react-bootstrap";
 
 export default function Client(props) {
     // const forceUpdate = useForceUpdate();
@@ -15,6 +17,7 @@ export default function Client(props) {
     const [limit, setlimit] = useState(localStorage.getItem("limit") || 10);
     const [offset, setoffset] = useState(localStorage.getItem("offset") || 0);
     const [totalCount, settotalCount] = useState(localStorage.getItem("totalCount") || -1);
+    const [selectedLine, setselectedLine] = useState(localStorage.getItem("selectedLine").split('\t') || []);
     const [data, setdata] = useState({
         header: [],
         body: []
@@ -49,6 +52,10 @@ export default function Client(props) {
         getData();
     },[limit,offset,totalCount]);
 
+    useEffect(() => {
+        console.table(selectedLine);
+    },[selectedLine]);
+
     const HandleStorageEvent = () => {
         window.onstorage = () => {
             // When local storage changes, dump the list to
@@ -56,6 +63,7 @@ export default function Client(props) {
             setlimit(localStorage.getItem("limit") || 10);
             setoffset(localStorage.getItem("offset") || 10);
             settotalCount(localStorage.getItem("totalCount") || -1);
+            setselectedLine(localStorage.getItem("selectedLine").split('\t') || []);
         };
     }
 
@@ -74,8 +82,19 @@ export default function Client(props) {
                 <Topbar />
                 <Sidebar />
                 <main>
-                    <Card title="Client Management" text="From this table you can manage the list of client:" />
+                    <Card title="Clients Management" text="From this table you can manage the list of client:" />
                     <Table data={data} loading={tableLoading} offset={setoffset} limit={setlimit}  />
+                    <Card title="Client Details:" text="Here the details of the selected client are show one by one:" />
+                    <Form>
+                        {
+                            data.header && data.header.map( (e, i) =>
+                                <div className={styles.detailContainer} key={i}>
+                                    <label>{e}</label>
+                                    <input readOnly className="form-control" value={selectedLine[i+1]} />
+                                </div>
+                            )
+                        }
+                    </Form>
                 </main>
             </div>
         }

@@ -39,6 +39,10 @@ body.no-extra {
   color: #6d6d6d;
 }
 
+.form-control:read-only {
+  background-color: #fff;
+}
+
 .form-control:active, .form-control:focus {
   border-color: #4680ff;
   box-shadow: 0 0 10px -4px;

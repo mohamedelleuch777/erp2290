@@ -52,6 +52,11 @@ export default function Table (props) {
         window.dispatchEvent( new Event('storage') )
     }
 
+    const selectTableLine = (e) => {
+        localStorage.setItem("selectedLine", e.target.parentElement.innerText);
+        window.dispatchEvent( new Event('storage') )
+    }
+
     useEffect(() => {
         setisLoading(props.loading);
         forceUpdate();
@@ -77,7 +82,7 @@ export default function Table (props) {
                             <tbody>
                                 {props.data && props.data.body.map((e,i)=>{
                                     return(
-                                        <tr>
+                                        <tr onClick={selectTableLine}>
                                             <th scope="row">{i+1}</th>
                                             {e.map((e,i)=>{
                                                 return(
@@ -89,19 +94,20 @@ export default function Table (props) {
                                 })}
                             </tbody>
                         </TableBootstrap>
-                    </div>
-                    <div  className={styles.buttonsContainer}>
-                        <div>
-                            <Combobox setRef={setrefCombo} options={options} icon="file-text-o" onChange={changeLimit} />
-                            <Button icon="search" style={{...btnStyle,...btn2Style}} />
+                        <div  className={styles.buttonsContainer}>
+                            <div>
+                                <Combobox setRef={setrefCombo} options={options} icon="file-text-o" onChange={changeLimit} />
+                                <Button icon="search" style={{...btnStyle,...btn2Style}} />
+                            </div>
+                            <div>
+                                <Button icon="backward" style={btnStyle} onClick={firstPage} />
+                                <Button icon="caret-left" style={btnStyle} onClick={previousPage} />
+                                <Button icon="caret-right" style={btnStyle} onClick={nextPage} />
+                                <Button icon="forward" style={btnStyle} onClick={lastPage} />
+                            </div>
                         </div>
-                        <div>
-                            <Button icon="backward" style={btnStyle} onClick={firstPage} />
-                            <Button icon="caret-left" style={btnStyle} onClick={previousPage} />
-                            <Button icon="caret-right" style={btnStyle} onClick={nextPage} />
-                            <Button icon="forward" style={btnStyle} onClick={lastPage} />
-                        </div>
                     </div>
+                    
                 </>
             }
         </>
@@ -114,7 +120,8 @@ const btnStyle = {
     width: 40,
     backgroundColor: "#fff",
     border: "none",
-    color: "#999"
+    color: "#999",
+    marginLeft: 5
 }
 
 const btn2Style = {
