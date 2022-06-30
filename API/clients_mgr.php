@@ -17,6 +17,33 @@ if($field!="" || $value!="") {
   $condition = " WHERE `".$field."` ".$operator." '".$value."'";
 }
 
+$reset = false;
+$lastPage = false;
+$totalCount = 0;
+$sql = "SELECT COUNT(`Ref`) as totalCount FROM ".$dbName.".".$tableName;
+if($offset=='-1'){
+    $offset = 0;
+    $sql = "SELECT COUNT(`Ref`) as totalCount FROM ".$dbName.".".$tableName;
+    $lastPage = true;
+}
+$query = new MySQL_Query($servername, $username, $password, $dbName);
+$res = $query->ExecSql($sql);
+
+if($res && $query->AvailableResult()) {
+    $row = $query->GetObject();
+    $totalCount = $row->totalCount;
+    if($lastPage || ($offset>=$totalCount)) {
+        $calculatedOffset = $totalCount - $limit ;
+        $offset = $calculatedOffset;
+        if($calculatedOffset<0 ) {
+            $offset = 0;
+            $reset = true;
+        }
+    }
+}
+
+// var_dump($calculatedOffset,$offset);die;
+
 
 $sql = "SELECT * FROM ".$dbName.".".$tableName.$condition." LIMIT ".$limit." OFFSET ".$offset;
 $query = new MySQL_Query($servername, $username, $password, $dbName);
@@ -63,21 +90,12 @@ $body .= ']';
 
 
 
-$totalCount = 0;
-$sql = "SELECT COUNT(`Ref`) as totalCount FROM ".$dbName.".".$tableName.$condition." LIMIT ".$limit." OFFSET ".$offset;
-$query = new MySQL_Query($servername, $username, $password, $dbName);
-$res = $query->ExecSql($sql);
-
-if($res && $query->AvailableResult()) {
-    $row = $query->GetObject();
-    $totalCount = $row->totalCount;
-}
-
 
 
 
 echo '{
     "header": ' . $header . ',
     "body": ' . $body . ',
-    "totalCount": ' . $totalCount . '
+    "totalCount": ' . $totalCount . ',
+    "reset": ' . ($reset?"true":"false") . '
 }';

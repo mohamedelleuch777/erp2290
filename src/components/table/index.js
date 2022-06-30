@@ -9,7 +9,7 @@ import useForceUpdate from "../../Hooks/forceUpdate";
 
 
 
-const options = [5,10,20,50,100,250,500]
+const options = [1,2,3,5,10,20,50,100,250,500]
 
 export default function Table (props) {
     
@@ -20,7 +20,36 @@ export default function Table (props) {
     const changeLimit = () => {
         localStorage.setItem("limit", refCombo.current.value);
         window.dispatchEvent( new Event('storage') )
-        props.getData && props.getData();
+    }
+
+    const firstPage = () => {
+        localStorage.setItem("offset", 0);
+        window.dispatchEvent( new Event('storage') )
+    }
+
+    const previousPage = () => {
+        let currentOffset = localStorage.getItem('offset');
+        let currentLimit = localStorage.getItem('limit');
+        let newOffset = parseInt(currentOffset)-parseInt(currentLimit);
+        localStorage.setItem("offset", newOffset>0?newOffset:0);
+        window.dispatchEvent( new Event('storage') )
+    }
+
+    const nextPage = () => {
+
+        let currentOffset = parseInt(localStorage.getItem('offset'));
+        let currentLimit = parseInt(localStorage.getItem('limit'));
+        let totalCount = parseInt(localStorage.getItem('totalCount'));
+        localStorage.setItem("offset", parseInt(currentOffset)+parseInt(currentLimit));
+        if(totalCount!=undefined && (totalCount<=-1 || currentOffset>=totalCount)) {
+            localStorage.setItem("offset", 0);
+        }
+        window.dispatchEvent( new Event('storage') )
+    }
+
+    const lastPage = () => {
+        localStorage.setItem("offset", -1);
+        window.dispatchEvent( new Event('storage') )
     }
 
     useEffect(() => {
@@ -64,10 +93,10 @@ export default function Table (props) {
                             <Combobox setRef={setrefCombo} options={options} icon="file-text-o" onChange={changeLimit} />
                         </div>
                         <div>
-                            <Button icon="backward" style={btnStyle} />
-                            <Button icon="caret-left" style={btnStyle} />
-                            <Button icon="caret-right" style={btnStyle} />
-                            <Button icon="forward" style={btnStyle} />
+                            <Button icon="backward" style={btnStyle} onClick={firstPage} />
+                            <Button icon="caret-left" style={btnStyle} onClick={previousPage} />
+                            <Button icon="caret-right" style={btnStyle} onClick={nextPage} />
+                            <Button icon="forward" style={btnStyle} onClick={lastPage} />
                         </div>
                     </div>
                 </>

@@ -6,12 +6,15 @@ import Table from "../../components/table";
 import Topbar from "../../components/topbar";
 import useForceUpdate from "../../Hooks/forceUpdate";
 
+import Swal from 'sweetalert2'
+
 export default function Client(props) {
     // const forceUpdate = useForceUpdate();
     const [isLoading, setisLoading] = useState(true);
     const [tableLoading, settableLoading] = useState(true);
     const [limit, setlimit] = useState(localStorage.getItem("limit") || 10);
     const [offset, setoffset] = useState(localStorage.getItem("offset") || 0);
+    const [totalCount, settotalCount] = useState(localStorage.getItem("totalCount") || -1);
     const [data, setdata] = useState({
         header: [],
         body: []
@@ -21,25 +24,38 @@ export default function Client(props) {
     const getData = async () => {
         // http://erp2290.xilyor.com/API/clients_mgr.php?limit=5&offset=2
         settableLoading(true);
-        let response = await fetch(`http://erp2290.xilyor.com//API/clients_mgr.php?limit=${limit}&offset=${offset}`, {
-            method: "GET",
-        });
-        let res = await response.json();
+        let res = null;
+        try {
+            let response = await fetch(`http://erp2290.xilyor.com//API/clients_mgr.php?limit=${limit}&offset=${offset}`, {
+                method: "GET",
+            });
+            res = await response.json();
+        } catch(e) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+        }
         setdata(res);
+        localStorage.setItem("totalCount",res.totalCount);
         setTimeout(() => {
             settableLoading(false);
-        }, 10);
+        }, 100);
     }
 
     useEffect(() => {
         getData();
-    },[limit]);
+    },[limit,offset,totalCount]);
 
     const HandleStorageEvent = () => {
         window.onstorage = () => {
             // When local storage changes, dump the list to
             // the console.
             setlimit(localStorage.getItem("limit") || 10);
+            setoffset(localStorage.getItem("offset") || 10);
+            settotalCount(localStorage.getItem("totalCount") || -1);
         };
     }
 
