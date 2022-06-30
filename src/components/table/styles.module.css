@@ -287,3 +287,11 @@
     flex-direction: row;
     justify-content: space-between;
   }
+
+  th, td, tr {
+    white-space: nowrap;
+  }
+
+  .tableContainer {
+    overflow-x: auto;
+  }

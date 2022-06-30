@@ -25,8 +25,8 @@ export default function Sidebar(props) {
             <h4>Pages:</h4>
             <ul className={styles.listUL}>
                 <Item label="Dashboard" icon="home" color="#4680ff" path="/" />
-                <Item label="Clients" icon="users" color="#FC6180" path="/login" />
-                <Item label="Stock" icon="bar-chart" color="#93BE52" path="/" />
+                <Item label="Clients" icon="users" color="#FC6180" path="/client" />
+                <Item label="Stock" icon="bar-chart" color="#93BE52" path="/login" />
                 <Item label="Users" icon="user" color="#FFB64D" path="/" />
                 <Item label="Help" icon="question" color="#ff4646" path="/" />
             </ul>
