@@ -93,6 +93,7 @@ export default function Table (props) {
                     <div  className={styles.buttonsContainer}>
                         <div>
                             <Combobox setRef={setrefCombo} options={options} icon="file-text-o" onChange={changeLimit} />
+                            <Button icon="search" style={{...btnStyle,...btn2Style}} />
                         </div>
                         <div>
                             <Button icon="backward" style={btnStyle} onClick={firstPage} />
@@ -114,4 +115,11 @@ const btnStyle = {
     backgroundColor: "#fff",
     border: "none",
     color: "#999"
+}
+
+const btn2Style = {
+    border: "1px solid #ccc",
+    borderRadius: 5,
+    top: -7,
+    marginLeft: 5
 }
