@@ -9,11 +9,11 @@ export default function Actions (props) {
     if(props.visibility && data.length>1) {
         // console.table();
         return (
-            <section style={section}>
-                <Button type="primary" label="Edit" icon="user" />
-                <Button type="success" label="Add" icon="user" />
-                <Button type="warning" label="Add" icon="user" />
-                <Button type="error" label="Add" icon="user" />
+            <section className={styles.sectionStyle}>
+                <Button type="primary" label="Edit" icon="user" style={{margin:5}} />
+                <Button type="success" label="Add" icon="user" style={{margin:5}} />
+                <Button type="warning" label="Add" icon="user" style={{margin:5}} />
+                <Button type="error" label="Add" icon="user" style={{margin:5}} />
             </section>
         )
     }
