@@ -19,11 +19,13 @@ export default function Table (props) {
 
     const changeLimit = () => {
         localStorage.setItem("limit", refCombo.current.value);
+        localStorage.setItem("selectedLine",'');
         window.dispatchEvent( new Event('storage') )
     }
 
     const firstPage = () => {
         localStorage.setItem("offset", 0);
+        localStorage.setItem("selectedLine",'');
         window.dispatchEvent( new Event('storage') )
     }
 
@@ -32,6 +34,7 @@ export default function Table (props) {
         let currentLimit = localStorage.getItem('limit');
         let newOffset = parseInt(currentOffset)-parseInt(currentLimit);
         localStorage.setItem("offset", newOffset>0?newOffset:0);
+        localStorage.setItem("selectedLine",'');
         window.dispatchEvent( new Event('storage') )
     }
 
@@ -44,11 +47,13 @@ export default function Table (props) {
         if(totalCount!=undefined && (totalCount<=-1 || currentOffset>=totalCount)) {
             localStorage.setItem("offset", 0);
         }
+        localStorage.setItem("selectedLine",'');
         window.dispatchEvent( new Event('storage') )
     }
 
     const lastPage = () => {
         localStorage.setItem("offset", -1);
+        localStorage.setItem("selectedLine",'');
         window.dispatchEvent( new Event('storage') )
     }
 

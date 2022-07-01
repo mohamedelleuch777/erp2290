@@ -53,7 +53,7 @@ export default function Client(props) {
     },[limit,offset,totalCount]);
 
     useEffect(() => {
-        console.table(selectedLine);
+        // console.table(selectedLine);
     },[selectedLine]);
 
     const HandleStorageEvent = () => {

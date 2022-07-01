@@ -5,7 +5,9 @@ import { Form as FormBootstrap } from 'react-bootstrap';
 export default function Form (props) {
 
 
-    if(props.visibility) {
+    const data = localStorage.getItem('selectedLine').split('\t');
+    if(props.visibility && data.length>1) {
+        // console.table();
         return (
             <FormBootstrap>
                 {
