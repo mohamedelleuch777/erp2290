@@ -9,6 +9,7 @@ import Form from "../../components/form";
 import useForceUpdate from "../../Hooks/forceUpdate";
 
 import Swal from 'sweetalert2'
+import Actions from "../../components/actions";
 
 export default function Client(props) {
     // const forceUpdate = useForceUpdate();
@@ -85,6 +86,7 @@ export default function Client(props) {
                     <Card title="Clients Management" text="From this table you can manage the list of client:" />
                     <Table data={data} loading={tableLoading} offset={setoffset} limit={setlimit}  />
                     <Card title="Client Details:" text="Here the details of the selected client are show one by one:" />
+                    <Actions visibility={!tableLoading} data={data} />
                     <Form visibility={!tableLoading} data={data} selectedLine={selectedLine} />
                 </main>
             </div>
