@@ -31,6 +31,8 @@ export default function Button (props) {
                 return " " + warning;
             case "error":
                 return " " + error;
+            default:
+                return "";
         }
     }
 
