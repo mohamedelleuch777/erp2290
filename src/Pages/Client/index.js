@@ -12,13 +12,14 @@ import Swal from 'sweetalert2'
 import Actions from "../../components/actions";
 
 export default function Client(props) {
-    // const forceUpdate = useForceUpdate();
+    const forceUpdate = useForceUpdate();
     const [isLoading, setisLoading] = useState(true);
     const [tableLoading, settableLoading] = useState(true);
     const [limit, setlimit] = useState(localStorage.getItem("limit") || 10);
     const [offset, setoffset] = useState(localStorage.getItem("offset") || 0);
     const [totalCount, settotalCount] = useState(localStorage.getItem("totalCount") || -1);
-    const [selectedLine, setselectedLine] = useState(localStorage.getItem("selectedLine").split('\t') || []);
+    const [selectedLine, setselectedLine] = useState(localStorage.getItem("selectedLine")?localStorage.getItem("selectedLine").split('\t') : []);
+    const [readOnly, setreadOnly] = useState(localStorage.getItem("readOnly") || true);
     const [data, setdata] = useState({
         header: [],
         body: []
@@ -54,8 +55,13 @@ export default function Client(props) {
     },[limit,offset,totalCount]);
 
     useEffect(() => {
-        // console.table(selectedLine);
+        console.table(selectedLine);
+        forceUpdate();
     },[selectedLine]);
+
+    useEffect(() => {
+        console.log(readOnly);
+    },[readOnly]);
 
     const HandleStorageEvent = () => {
         window.onstorage = () => {
@@ -65,6 +71,7 @@ export default function Client(props) {
             setoffset(localStorage.getItem("offset") || 10);
             settotalCount(localStorage.getItem("totalCount") || -1);
             setselectedLine(localStorage.getItem("selectedLine").split('\t') || []);
+            setreadOnly(localStorage.getItem("readOnly")=="true"?true:false);
         };
     }
 
@@ -84,10 +91,10 @@ export default function Client(props) {
                 <Sidebar />
                 <main>
                     <Card title="Clients Management" text="From this table you can manage the list of client:" />
+                    <Actions visibility={!tableLoading} data={data} />
                     <Table data={data} loading={tableLoading} offset={setoffset} limit={setlimit}  />
                     <Card title="Client Details:" text="Here the details of the selected client are show one by one:" />
-                    <Actions visibility={!tableLoading} data={data} />
-                    <Form visibility={!tableLoading} data={data} selectedLine={selectedLine} />
+                    <Form visibility={!tableLoading} data={data} selectedLine={selectedLine} readOnly={readOnly} />
                 </main>
             </div>
         }
