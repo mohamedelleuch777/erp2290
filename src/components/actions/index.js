@@ -19,7 +19,6 @@ export default function Actions (props) {
     }
 
     const editClient = () => {
-        console.log('d');
         if(localStorage.selectedLine && localStorage.selectedLine.split('\t').length>1) {
             localStorage.setItem("tableDisabled", "true");
         // localStorage.setItem("readOnly", localStorage.getItem("readOnly")=="true"?false:true)
@@ -129,15 +128,43 @@ export default function Actions (props) {
         }
     }
 
+    const deleteClient = () => {
+        if(!(localStorage.selectedLine && localStorage.selectedLine.split('\t').length>1)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'error',
+                html: 'Oops! Please firstly select a record to delete it'
+            })
+            return;
+        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            }
+          })
+    }
+
     const mode = () => {
         let _mode = localStorage.mode || "default";
         switch(_mode) {
             case "default":
                 return  <section className={styles.sectionStyle}>
                             <Button type="success" label="Add" icon="plus-square-o" style={{margin:5}} onClick={addClient} />
-                            <Button type="primary" label="Edit" icon="edit" style={{margin:5}} onClick={editClient} />
-                            <Button type="warning" label="Add" icon="user" style={{margin:5}} />
-                            <Button type="error" label="Add" icon="user" style={{margin:5}} />
+                            <Button type="warning" label="Edit" icon="edit" style={{margin:5}} onClick={editClient} />
+                            <Button type="error" label="Delete" icon="trash-o" style={{margin:5}} onClick={deleteClient} />
+                            <Button type="primary" label="Add Sale" icon="user" style={{margin:5}} />
                         </section>
             case "save-cancel":
                 return  <section className={styles.sectionStyle}>
