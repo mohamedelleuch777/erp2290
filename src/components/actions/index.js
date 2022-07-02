@@ -3,7 +3,8 @@ import Button from "../button";
 import styles from './styles.module.css';
 
 import Swal from 'sweetalert2'
-import FormManipulator from "../../Hooks/formManipulator";
+// import { GetFormValuesForSqlInsert,  GetFormValuesForSqlUpdate } from "../../Hooks/formManipulator";
+import { GetFormValuesForSqlInsert, GetFormValuesForSqlUpdate } from "../../Hooks/formManipulator";
 
 export default function Actions (props) {
     const [workingMode, setworkingMode] = useState(localStorage.mode || "default");
@@ -33,12 +34,29 @@ export default function Actions (props) {
     }
 
     const confirmEditClient = async () => {
+        let params = GetFormValuesForSqlUpdate();
         try {
-            let response = await fetch(`http://erp2290.xilyor.com//API/edit_clients_mgr.php?ref=`, {
+            let response = await fetch(`http://erp2290.xilyor.com//API/edit_clients_mgr.php?ref=${params.ref}&params=${params.finalResult}`, {
                 method: "GET",
             });
             let res = await response.json();
-
+            if(res.affectedRows==1 && res.success) {
+                localStorage.setItem("readOnly", true)
+                localStorage.setItem("tableDisabled", false)
+                localStorage.setItem("mode","default");
+                window.dispatchEvent( new Event('storage') )
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'The client has been edited successfully!!'
+                })
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'error',
+                    html: 'Oops! Could\'t edit this client.<br>Error Messasge:<br><strong>'+res.error+'</strong>'
+                })
+            }
 
             localStorage.setItem("readOnly", true)
             localStorage.setItem("mode","default");
@@ -54,7 +72,7 @@ export default function Actions (props) {
     }
 
     const confirmAddClient = async () => {
-        let params = FormManipulator();
+        let params = GetFormValuesForSqlInsert();
         try {
             let response = await fetch(`http://erp2290.xilyor.com//API/add_clients_mgr.php?values=${params}`, {
                 method: "GET",
