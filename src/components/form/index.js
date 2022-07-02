@@ -11,8 +11,14 @@ export default function Form (props) {
 
     const handleUserInput = (e,u) => {
         if(!props.readOnly) {
+            console.log("ghhghgh")
             let temp = selectedLine;
-            temp[u] = temp[u]+e.nativeEvent.data;
+            if(e.nativeEvent.inputType == "insertText") {
+                temp[u] = temp[u]+e.nativeEvent.data;
+            }
+            else if(e.nativeEvent.inputType == "deleteContentBackward") {
+                temp[u] = temp[u].slice(0, -1);
+            }
             setselectedLine(temp);
             forceUpdate();
         }
@@ -42,7 +48,7 @@ export default function Form (props) {
                 {
                     data.header && data.header.map( (e, i) =>
                         <div className={styles.detailContainer} key={i}>
-                            {console.log(e,selectedLine[i+1])}
+                            {/* {console.log(e,selectedLine[i+1])} */}
                             <label>{e}</label>
                             <input readOnly={false} className="form-control" value={selectedLine[i+1]} onChange={ e => handleUserInput(e,i+1)} />
 
