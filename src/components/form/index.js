@@ -9,6 +9,15 @@ export default function Form (props) {
     const [selectedLine, setselectedLine] = useState(props.selectedLine);
     // const [refresh, setrefresh] = useState(true);
 
+    const handleUserInput = (e,u) => {
+        if(!props.readOnly) {
+            let temp = selectedLine;
+            temp[u] = temp[u]+e.nativeEvent.data;
+            setselectedLine(temp);
+            forceUpdate();
+        }
+    }
+
     const HandleStorageEvent = () => {
         window.addEventListener("storage", () => {
             // setrefresh(false)
@@ -18,15 +27,6 @@ export default function Form (props) {
             // }, 0);
         })
         
-    }
-
-    const handleUserInput = (e,u) => {
-        if(!props.readOnly) {
-            let temp = selectedLine;
-            temp[u] = temp[u]+e.nativeEvent.data;
-            setselectedLine(temp);
-            forceUpdate();
-        }
     }
 
     useEffect(()=>{

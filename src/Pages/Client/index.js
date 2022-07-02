@@ -35,6 +35,11 @@ export default function Client(props) {
                 method: "GET",
             });
             res = await response.json();
+            setdata(res);
+            localStorage.setItem("totalCount",res.totalCount);
+            setTimeout(() => {
+                settableLoading(false);
+            }, 100);
         } catch(e) {
             Swal.fire({
                 icon: 'error',
@@ -43,11 +48,6 @@ export default function Client(props) {
                 footer: '<a href="">Why do I have this issue?</a>'
               })
         }
-        setdata(res);
-        localStorage.setItem("totalCount",res.totalCount);
-        setTimeout(() => {
-            settableLoading(false);
-        }, 100);
     }
 
     useEffect(() => {

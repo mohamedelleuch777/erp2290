@@ -16,6 +16,7 @@ export default function Table (props) {
     const forceUpdate = useForceUpdate();
     const [isLoading, setisLoading] = useState(props.loading);
     const [refCombo, setrefCombo] = useState(null);
+    const [tableDisabled, settableDisabled] = useState(localStorage.tableDisabled || false);
 
     const changeLimit = () => {
         localStorage.setItem("limit", refCombo.current.value);
@@ -67,6 +68,16 @@ export default function Table (props) {
         forceUpdate();
     },[props.loading]);
 
+    const HandleStorageEvent = () => {
+        window.addEventListener("storage", () => {
+            settableDisabled(localStorage.tableDisabled=="true"?true:false || false);
+        })        
+    }
+
+    useEffect(()=>{
+        HandleStorageEvent();
+    },[]);
+
     return (
         <>
             {isLoading && <Loading />}
@@ -111,6 +122,7 @@ export default function Table (props) {
                                 <Button icon="forward" style={btnStyle} onClick={lastPage} />
                             </div>
                         </div>
+                        {tableDisabled &&<div className={styles.tableOverLap}></div>}
                     </div>
                     
                 </>
