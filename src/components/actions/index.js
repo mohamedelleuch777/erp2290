@@ -19,11 +19,22 @@ export default function Actions (props) {
     }
 
     const editClient = () => {
-        localStorage.setItem("tableDisabled", "true");
+        console.log('d');
+        if(localStorage.selectedLine && localStorage.selectedLine.split('\t').length>1) {
+            localStorage.setItem("tableDisabled", "true");
         // localStorage.setItem("readOnly", localStorage.getItem("readOnly")=="true"?false:true)
-        localStorage.setItem("readOnly", false)
-        localStorage.setItem("mode","save-cancel");
-        window.dispatchEvent( new Event('storage') )
+            localStorage.setItem("readOnly", false)
+            localStorage.setItem("mode","save-cancel");
+            window.dispatchEvent( new Event('storage') )
+
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'error',
+                html: 'Oops! Please firstly select a record to edit'
+            })
+        }
+        
     }
 
     const cancelOperation = () => {
@@ -45,11 +56,22 @@ export default function Actions (props) {
                 localStorage.setItem("tableDisabled", false)
                 localStorage.setItem("mode","default");
                 window.dispatchEvent( new Event('storage') )
-                Swal.fire({
+                // // refresh table from database
+                // let tempVal = localStorage.offset;
+                // localStorage.setItem("offset","0");
+                // window.dispatchEvent( new Event('storage') )
+                // localStorage.setItem("offset",tempVal);
+                // window.dispatchEvent( new Event('storage') )
+                // // end refresh table 
+                await Swal.fire({
                     icon: 'success',
                     title: 'Success',
                     text: 'The client has been edited successfully!!'
-                })
+                });
+
+                localStorage.setItem("selectedLine",undefined);
+                window.dispatchEvent( new Event('storage') )
+                window.location.reload();
             } else {
                 Swal.fire({
                     icon: 'error',
