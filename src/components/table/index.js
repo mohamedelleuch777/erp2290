@@ -16,7 +16,7 @@ export default function Table (props) {
     const forceUpdate = useForceUpdate();
     const [isLoading, setisLoading] = useState(props.loading);
     const [refCombo, setrefCombo] = useState(null);
-    const [tableDisabled, settableDisabled] = useState(localStorage.tableDisabled || false);
+    const [tableDisabled, settableDisabled] = useState(localStorage.tableDisabled=="true"?true:false || false);
 
     const changeLimit = () => {
         localStorage.setItem("limit", refCombo.current.value);

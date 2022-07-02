@@ -62,7 +62,7 @@ export default function Actions (props) {
                 method: "GET",
             });
             let res = await response.json();
-            if(res["affected rows"]==1 && res["success"]==true) {
+            if(res.affectedRows==1 && res.success) {
                 localStorage.setItem("readOnly", true)
                 localStorage.setItem("tableDisabled", false)
                 localStorage.setItem("mode","default");
@@ -76,7 +76,8 @@ export default function Actions (props) {
                 Swal.fire({
                     icon: 'error',
                     title: 'error',
-                    text: 'Oops! Could\'t create a new client.'
+                    text: 'Oops! Could\'t create a new client.',
+                    footer: '<a href="">Error code: '+res.error+'</a>'
                 })
             }
 

@@ -29,7 +29,7 @@ export default function Login(props) {
                     <a href="/forget_Password">Forget Password</a>
                 </div>
             </div>
-            <Button label="Login" onClick={()=>alert("ahp me")}/>
+            <Button type="primary" label="Login" onClick={()=>alert("ahp me")}/>
             <hr />
             <div className={styles.flexSpaceBetween}>
                 <p>

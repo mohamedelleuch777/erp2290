@@ -16,9 +16,11 @@ $sql = "INSERT INTO ".$dbName.".".$tableName." VALUES(".$values.")";
 $query = new MySQL_Query($servername, $username, $password, $dbName);
 $res = $query->ExecSql($sql);
 $affected = $query->GetAffectedRowsCount();
+$error = $query->GetError();
 
 
 echo '{
     "success": ' . ($affected>0?'true':'false') . ',
-    "affected rows": ' . $affected . '
+    "affectedRows": ' . $affected . ',
+    "error": "' . $error . '"
 }';
