@@ -13,5 +13,6 @@ export default function FormManipulator(){
         }
     };
     finalResult = finalResult.join();
+    finalResult = encodeURI(finalResult);
     return finalResult;
 }

@@ -55,8 +55,6 @@ export default function Actions (props) {
 
     const confirmAddClient = async () => {
         let params = FormManipulator();
-        debugger
-        
         try {
             let response = await fetch(`http://erp2290.xilyor.com//API/add_clients_mgr.php?values=${params}`, {
                 method: "GET",
@@ -76,8 +74,7 @@ export default function Actions (props) {
                 Swal.fire({
                     icon: 'error',
                     title: 'error',
-                    text: 'Oops! Could\'t create a new client.',
-                    footer: '<a href="">Error code: '+res.error+'</a>'
+                    html: 'Oops! Could\'t create a new client.<br>Error Messasge:<br><strong>'+res.error+'</strong>'
                 })
             }
 
