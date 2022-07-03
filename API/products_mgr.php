@@ -17,6 +17,33 @@ if($field!="" || $value!="") {
   $condition = " WHERE `".$field."` ".$operator." '".$value."'";
 }
 
+$reset = false;
+$lastPage = false;
+$totalCount = 0;
+$sql = "SELECT COUNT(`Ref`) as totalCount FROM ".$dbName.".".$tableName;
+if($offset=='-1'){
+    $offset = 0;
+    $sql = "SELECT COUNT(`Ref`) as totalCount FROM ".$dbName.".".$tableName;
+    $lastPage = true;
+}
+$query = new MySQL_Query($servername, $username, $password, $dbName);
+$res = $query->ExecSql($sql);
+
+if($res && $query->AvailableResult()) {
+    $row = $query->GetObject();
+    $totalCount = $row->totalCount;
+    if($lastPage || ($offset>=$totalCount)) {
+        $calculatedOffset = $totalCount - $limit ;
+        $offset = $calculatedOffset;
+        if($calculatedOffset<0 ) {
+            $offset = 0;
+            $reset = true;
+        }
+    }
+}
+
+// var_dump($calculatedOffset,$offset);die;
+
 
 $sql = "SELECT * FROM ".$dbName.".".$tableName.$condition." LIMIT ".$limit." OFFSET ".$offset;
 $query = new MySQL_Query($servername, $username, $password, $dbName);
@@ -34,12 +61,7 @@ $myJsonHeader = '[';
 for($i=0; $i<sizeof($header); $i++) {
     //var_dump($header[$i]);
     $myJsonHeader .=
-    '
-    {
-        "name": "' . $header[$i] . '",
-        "selector": "row => row.' . $header[$i] . '",
-        "sortable": ' . "true" . '
-    },';
+    '"'.$header[$i].'",';
 }
 $myJsonHeader = substr($myJsonHeader, 0, -1);
 $myJsonHeader .= ']';
@@ -49,25 +71,31 @@ $header = $myJsonHeader;
 
 
 
-
-
-$body = [];
-
+$body = "[";
 while($res && $query->AvailableResult()) {
     $row = $query->GetObject();
-    array_push($body, $row);
+    $arr = json_decode(json_encode($row), true);
+    $keys = array_keys($arr);
+    $val = '[';
+    for($i=0; $i<sizeof($keys); $i++) {
+        $val .= '"' . $arr[$keys[$i]] . '",';
+    }
+    $val = substr($val, 0, -1);
+    $body .=  $val . '],';
 }
 
-$body = json_encode($body);
 
-// $data = array(
-//     "header" => $header,
-//     "body" => $body
+$body = substr($body, 0, -1);
+$body .= ']';
 
-// );
 
-// echo json_encode($data);
+
+
+
+
 echo '{
     "header": ' . $header . ',
-    "body": ' . $body . '
+    "body": ' . $body . ',
+    "totalCount": ' . $totalCount . ',
+    "reset": ' . ($reset?"true":"false") . '
 }';

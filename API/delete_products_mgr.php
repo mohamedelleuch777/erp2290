@@ -3,7 +3,7 @@
 
 require 'core.php';
 
-$tableName = "ClientsManagement";
+$tableName = "ProductsManagement";
 
 $ref = $_GET["ref"];
 

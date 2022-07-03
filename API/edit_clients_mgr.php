@@ -6,6 +6,7 @@ require 'core.php';
 $tableName = "ClientsManagement";
 
 $ref = $_GET["ref"];
+$params = $_GET["params"];
 
 // UPDATE `ClientsManagement` SET `FirstName` = 'tenflewe', `LastName`= '5orchi' WHERE `ClientsManagement`.`Ref` = 10005;
 

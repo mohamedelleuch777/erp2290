@@ -3,14 +3,17 @@
 
 require 'core.php';
 
-$tableName = "ClientsManagement";
+$tableName = "ProductsManagement";
 
 $ref = $_GET["ref"];
+$params = $_GET["params"];
 
-// DELETE FROM ClientsManagement WHERE `ClientsManagement`.`Ref` = 10017
+// UPDATE `ClientsManagement` SET `FirstName` = 'tenflewe', `LastName`= '5orchi' WHERE `ClientsManagement`.`Ref` = 10005;
 
-$sql = "DELETE FROM ".$dbName.".".$tableName." WHERE `".$tableName."`.`Ref` = ".$ref.";";
+$sql = "UPDATE ".$dbName.".".$tableName." SET ".$params." WHERE `".$tableName."`.`Ref` = ".$ref.";";
 
+// var_dump($sql);
+// die;
 
 $query = new MySQL_Query($servername, $username, $password, $dbName);
 $res = $query->ExecSql($sql);

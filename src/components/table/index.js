@@ -18,6 +18,8 @@ export default function Table (props) {
     const [refCombo, setrefCombo] = useState(null);
     const [tableDisabled, settableDisabled] = useState(localStorage.tableDisabled=="true"?true:false || false);
 
+    const refTable = useRef();
+
     const changeLimit = () => {
         localStorage.setItem("limit", refCombo.current.value);
         localStorage.setItem("selectedLine",'');
@@ -70,7 +72,15 @@ export default function Table (props) {
 
     const HandleStorageEvent = () => {
         window.addEventListener("storage", () => {
+            console.log("ff");
             settableDisabled(localStorage.tableDisabled=="true"?true:false || false);
+            if(localStorage.tableDisabled=="true") {
+                refTable.current.scroll(0,0);
+                refTable.current.style.overflow = "hidden";
+            } else {
+                refTable.current.style.overflow = "auto";
+            }
+
         })        
     }
 
@@ -83,7 +93,7 @@ export default function Table (props) {
             {isLoading && <Loading />}
             {isLoading || 
                 <>
-                    <div className={styles.tableContainer}>
+                    <div ref={refTable} className={styles.tableContainer}>
                         <TableBootstrap striped bordered hover size="sm">
                             <thead>
                                 <tr>

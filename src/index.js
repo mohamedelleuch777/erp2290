@@ -10,6 +10,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import Dashboard from './Pages/Dashboard'
 import Login from './Pages/Login'
 import Client from './Pages/Client';
+import Product from './Pages/Product'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,7 +19,8 @@ root.render(
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />}/>
-        <Route path="/client" element={<Client />}/>
+        <Route path="/clients" element={<Client />}/>
+        <Route path="/products" element={<Product />}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

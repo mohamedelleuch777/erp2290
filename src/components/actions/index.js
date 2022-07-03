@@ -54,9 +54,10 @@ export default function Actions (props) {
     }
 
     const confirmEditClient = async () => {
+        let pageName = window.location.pathname.split('/')[1];
         let params = GetFormValuesForSqlUpdate();
         try {
-            let response = await fetch(`http://erp2290.xilyor.com//API/edit_clients_mgr.php?ref=${params.ref}&params=${params.finalResult}`, {
+            let response = await fetch(`http://erp2290.xilyor.com//API/edit_${pageName}_mgr.php?ref=${params.ref}&params=${params.finalResult}`, {
                 method: "GET",
             });
             let res = await response.json();
@@ -98,9 +99,10 @@ export default function Actions (props) {
     }
 
     const confirmAddClient = async () => {
+        let pageName = window.location.pathname.split('/')[1];
         let params = GetFormValuesForSqlInsert();
         try {
-            let response = await fetch(`http://erp2290.xilyor.com//API/add_clients_mgr.php?values=${params}`, {
+            let response = await fetch(`http://erp2290.xilyor.com/API/add_${pageName}_mgr.php?values=${params}`, {
                 method: "GET",
             });
             let res = await response.json();
@@ -127,6 +129,7 @@ export default function Actions (props) {
     }
 
     const deleteClient = async () => {
+        let pageName = window.location.pathname.split('/')[1];
         if(!(localStorage.selectedLine && localStorage.selectedLine.split('\t').length>1)) {
             Swal.fire({
                 icon: 'error',
@@ -147,7 +150,7 @@ export default function Actions (props) {
                 confirmButtonText: 'Yes, delete it!'
               }).then(async(result) => {
                     if (result.isConfirmed) {
-                        let response = await fetch(`http://erp2290.xilyor.com/API/delete_clients_mgr.php?ref=${ref}`, {
+                        let response = await fetch(`http://erp2290.xilyor.com/API/delete_${pageName}_mgr.php?ref=${ref}`, {
                         method: "GET",
                     });
                     let res = await response.json();
