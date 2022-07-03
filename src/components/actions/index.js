@@ -4,10 +4,20 @@ import styles from './styles.module.css';
 
 import Swal from 'sweetalert2'
 // import { GetFormValuesForSqlInsert,  GetFormValuesForSqlUpdate } from "../../Hooks/formManipulator";
-import { GetFormValuesForSqlInsert, GetFormValuesForSqlUpdate } from "../../Hooks/formManipulator";
+import { GetFormValuesForSqlInsert, GetFormValuesForSqlUpdate, GetFormRef } from "../../Hooks/formManipulator";
 
 export default function Actions (props) {
     const [workingMode, setworkingMode] = useState(localStorage.mode || "default");
+
+
+    const unknownError = () => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+        })
+    }
 
     const addClient = () => {
         localStorage.setItem("tableDisabled", "true");
@@ -83,12 +93,7 @@ export default function Actions (props) {
             localStorage.setItem("mode","default");
             window.dispatchEvent( new Event('storage') )
         } catch (e) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-                footer: '<a href="">Why do I have this issue?</a>'
-            })
+            unknownError();
         }
     }
 
@@ -116,19 +121,12 @@ export default function Actions (props) {
                     html: 'Oops! Could\'t create a new client.<br>Error Messasge:<br><strong>'+res.error+'</strong>'
                 })
             }
-
-            
         } catch (e) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-                footer: '<a href="">Why do I have this issue?</a>'
-            })
+            unknownError();
         }
     }
 
-    const deleteClient = () => {
+    const deleteClient = async () => {
         if(!(localStorage.selectedLine && localStorage.selectedLine.split('\t').length>1)) {
             Swal.fire({
                 icon: 'error',
@@ -137,23 +135,46 @@ export default function Actions (props) {
             })
             return;
         }
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-              )
-            }
-          })
+        let ref = GetFormRef();
+        try {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+              }).then(async(result) => {
+                    if (result.isConfirmed) {
+                        let response = await fetch(`http://erp2290.xilyor.com/API/delete_clients_mgr.php?ref=${ref}`, {
+                        method: "GET",
+                    });
+                    let res = await response.json();
+                    if(res.affectedRows==1 && res.success) {
+                        localStorage.setItem("readOnly", true)
+                        localStorage.setItem("tableDisabled", false)
+                        localStorage.setItem("mode","default");
+                        window.dispatchEvent( new Event('storage') )
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'error',
+                            html: 'Oops! Could\'t delete this client.<br>Error Messasge:<br><strong>'+res.error+'</strong>'
+                        })
+                    }
+                    
+                }
+              })
+        } catch (e) {
+            unknownError();
+        }
+        
     }
 
     const mode = () => {

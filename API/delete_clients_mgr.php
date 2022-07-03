@@ -6,11 +6,11 @@ require 'core.php';
 $tableName = "ClientsManagement";
 
 $ref = $_GET["ref"];
+$params = $_GET["params"];
 
-// UPDATE `ClientsManagement` SET `FirstName` = 'tenflewe', `LastName`= '5orchi' WHERE `ClientsManagement`.`Ref` = 10005;
+// DELETE FROM ClientsManagement WHERE `ClientsManagement`.`Ref` = 10017
 
-$sql = "UPDATE ".$dbName.".".$tableName." SET ".$params." WHERE `".$tableName."`.`Ref` = ".$ref.";";
-
+$sql = "DELETE FROM ".$dbName.".".$tableName." WHERE `".$tableName."`.`Ref` = ".$ref.";";
 
 
 $query = new MySQL_Query($servername, $username, $password, $dbName);

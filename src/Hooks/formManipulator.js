@@ -35,9 +35,18 @@ const GetFormValuesForSqlUpdate = () => {
     finalResult = encodeURI(finalResult);
     return {finalResult, ref};
 }
+const GetFormRef = () => {
+    let ref = 0;
+    let form = document.getElementsByTagName('form')[0];
+    if(!form) return;
+    let inputs = form.getElementsByTagName('input');
+    ref = inputs[0].value;
+    return ref;
+}
 
 export {
     GetFormValuesForSqlInsert,
-    GetFormValuesForSqlUpdate
+    GetFormValuesForSqlUpdate,
+    GetFormRef
     
 }
